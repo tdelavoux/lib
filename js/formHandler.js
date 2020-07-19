@@ -216,7 +216,8 @@ $(function(){
 				}
 
 				if( counter === 0){
-					err.push(error);
+					if(err.indexOf(error) === -1)
+						err.push(error);
 					blocage =  true;
 				}
 			}
