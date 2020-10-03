@@ -230,8 +230,12 @@ $(function(){
 		if(blocage === true){
 			$('form').submit(function(e) {e.preventDefault();});
 
+			//Reinitialisation
+			$('#alertPerso').detach();
+			var uniqId = Date.now();
+
 			// ---- Affichage des erreurs ----
-				var errorText = '<div class="alertPerso" id="alertPerso" style="position: fixed;right: 1em;top: 3em;z-index: 9999;">' +
+				var errorText = '<div class="alertPerso" id="alertPerso' + uniqId + '" style="position: fixed;right: 1em;top: 3em;z-index: 9999;">' +
 									'<div class="alert alert-danger">'+
 										'<span class="glyphicon glyphicon-hand-right" style="margin: 0 0.5em;"></span>'+
 										'<strong>Oops, une petite erreur ?</strong><hr class="message-inner-separator">';
@@ -241,7 +245,7 @@ $(function(){
 				errorText += '</div></div>';
 				$('body').append(errorText);
 				setTimeout(function() {
-					$('#alertPerso').detach();
+					$('#alertPerso'+uniqId).detach();
 				}, 5000);
 
 				// reinit les flux de données
@@ -291,6 +295,7 @@ function reinitColor(){
 	 */
 	$('select').change(function(){
 			$(this).parent().removeClass(CLASS_ERROR);
+			$(this).parent().parent().removeClass(CLASS_ERROR);
 	});
 
 	/**
